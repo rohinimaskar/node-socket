@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="/bower_components/webcomponentsjs/webcomponents.js"></script>
+
+        <link rel="import" href="/bower_components/polymer/polymer.html">
+		<link rel="import" href="/bower_components/paper-shadow/paper-shadow.html">
+        <link rel="import" href="/bower_components/core-icon/core-icon.html">
+        <link rel="import" href="/bower_components/paper-input/paper-input-decorator.html">
+        <link rel="import" href="/bower_components/paper-button/paper-button.html">
+		
+       		
+		<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+		
+		<title>Chat Application</title>
+
+        <style>
+		paper-shadow {
+                margin: auto;
+				text-align:left;
+				width: 90%;
+                padding: 10px;
+                float: center;
+                border-color: black
+            }
+		
+            form paper-input-decorator {
+               margin:auto;
+                width: 90%;
+                
+            }
+			
+            form paper-button {
+                size: 50%;
+				text-align:center;
+				margin:auto;
+				background: blue;
+                display:block;
+				
+				width: 90%;
+				
+            }
+			paper-button:hover {
+                background: gray;
+            }
+
+        </style>
+
+        <script>
+            function loadEvent() {
+                var socket = io();
+                var myMsg = document.getElementById("text");
+				var messagesList = document.getElementById("window");
+                var form = document.getElementById("form");
+                var button = document.getElementById("button");
+				
+				form.addEventListener('submit', formSubmit);
+                button.addEventListener('click', formSubmit);
+
+                function formSubmit(event) {
+					event.preventDefault();
+                    socket.emit('MyMessage', myMsg.value);
+                    myMsg.value = "";
+                }
+				socket.on('MyMessage', function(msg) {
+                    var shadow = document.createElement('paper-shadow');
+                    shadow.innerHTML = msg;
+                    messagesList.appendChild(shadow);
+                });
+            }
+        </script>
+    </head>
+    <body onLoad="loadEvent()">
+	<div id="window"></div>
+        <form id="form" action="">
+            <paper-input-decorator label="Type your message here"> 
+             <input id="text" >   
+            </paper-input-decorator>
+            <paper-button id="button" >
+			send
+			</paper-button>
+        </form>
+    </body>
+</html>

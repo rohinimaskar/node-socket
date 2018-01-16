@@ -1,0 +1,26 @@
+{
+  "name": "polymer-assignment",
+  "main": "index.js",
+  "version": "0.0.1",
+  "keywords": [
+    "polymer",
+    "web",
+    "components",
+    "socketio"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.5",
+    "core-elements": "Polymer/core-elements#~0.5",
+    "paper-elements": "Polymer/paper-elements#~0.5"
+  },
+  "description": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
